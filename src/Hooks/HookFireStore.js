@@ -12,20 +12,21 @@ const useFireStore = (collection, condition) => {
             if(!condition.compareValue || !condition.compareValue.length) {
                 return;
             }
-            collectionRef.where(condition.feildName, condition.operator, condition.compareValue);
+           collectionRef = collectionRef.where(condition.fieldName, condition.operator, condition.compareValue);
         }
-
+       
         const unsubcribed = collectionRef.onSnapshot((snapshot) => {
             const documents = snapshot.docs.map(doc => ({
                 ...doc.data(),
                 id: doc.id
             }));
+             
             setDocuments(documents);
         });
 
        return unsubcribed;
     }, [collection, condition]);
-
+    
     return documents;
 };
 

@@ -4,7 +4,7 @@ import firebase, { auth } from '../../Firebase/config';
 import styled from 'styled-components';
 import { GoogleCircleFilled, FacebookOutlined } from '@ant-design/icons';
 import logo from '../../img/back.png';
-import { addDocument } from './../../Firebase/services';
+import { addDocument, generateKeywords } from './../../Firebase/services';
 
 const { Title } = Typography
 
@@ -49,7 +49,8 @@ export default function Login() {
             email: user.email,
             photoURL: user.photoURL,
             uid: user.uid,
-            providerId: additionalUserInfo.providerId
+            providerId: additionalUserInfo.providerId,
+            keywords: generateKeywords(user.displayName)
            });
        }
     }
